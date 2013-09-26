@@ -1,5 +1,9 @@
 ## Homework 2
 
+For this homework assignment, you'll be warming up to JavaScript. 
+
+Provide the code online as well in two jsfiddles: one for problems 1-9 and one for problem 10. You may use jQuery.
+
 1. Write a JavaScript function that accepts a number of U.S. cents and returns an array containing, respectively, the smallest number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
 
 		> change(96)
