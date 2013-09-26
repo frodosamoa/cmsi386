@@ -1,4 +1,4 @@
-### Homework 2
+## Homework 2
 
 1. Write a JavaScript function that accepts a number of U.S. cents and returns an array containing, respectively, the smallest number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
 
