@@ -119,13 +119,13 @@ Use the following HTML driver for the tests:
 10. Write a JavaScript script that writes successive prefixes of the value entered into a web page text field into new div elements, one after another, starting with the first prefix, which is zero characters long. The new divs should be added approximately one second apart.
 Assuming the string "matsumoto" were entered, the divs would be:
 
-		 
-		m
-		ma
-		mat
-		mats
-		matsu
-		matsum
-		matsumo
-		matsumot
-		matsumoto
+		* 
+		* m
+		* ma
+		* mat
+		* mats
+		* matsu
+		* matsum
+		* matsumo
+		* matsumot
+		* matsumoto
