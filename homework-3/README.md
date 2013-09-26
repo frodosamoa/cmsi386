@@ -1,5 +1,9 @@
 ##Homework 3
 
+For this homework assignment, you'll be warming up to Go. 
+
+Package everything up nicely in a github repo.
+
 1. Write a Go package containing the following:
   1. A function that accepts a number of U.S. cents and returns a tuple containing, respectively, the smallest number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
   2. A function that takes in a string s and returns the string which is equivalent to s but with all ASCII vowels removed.
