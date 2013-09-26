@@ -19,16 +19,16 @@ def scramble (string):
 	return ''.join(random.sample(string, len(string)))
 
 def powers_of_two(n):
-	"""Generator of powers of two up to the passed limit."""
+	"""Generator of powers of two up to and including the passed limit."""
 	num = 1
-	while num < n:
+	while num <= n:
 		yield num
 		num *= 2
 
 def powers(base, n):
-	"Generator of powers of an arbitrary base up to the passed limit."
+	"Generator of powers of an arbitrary base up to and including the passed limit."
 	num = 1
-	while num < n:
+	while num <= n:
 		yield num
 		num *= base
 
@@ -41,4 +41,4 @@ def interleave(l1, l2):
 
 def stutter (list):
 	"""Returns the list with each item doubled up."""
-	return [item for item in list for x in range (0,2)]
+	return interleave(list, list)
