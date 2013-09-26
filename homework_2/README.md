@@ -96,7 +96,7 @@
 		    // Test word count here
 		});
 
-Use the following HTML driver for the tests:
+	Use the following HTML driver for the tests:
 
 		javascriptwarmup.html
 		<!doctype html>
