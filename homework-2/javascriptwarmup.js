@@ -1,162 +1,159 @@
-/**
- *  Homework #2 CMSI386 Programming Languages
- *  Andrew Kowalczyk
- */
-
-var i;    //Reuseable i variable;
-
-/**
- * Accepts a number of U.S. cents and returns an array containing the  smallest
- * number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
- */
-
-function change(cents) {
-    var remaining = cents,
-        denominations = [25, 10, 5, 1],
-        change = [0, 0, 0, 0];
-    
-    if (cents < 0) {
-         throw new RangeError("The amount of cents must be 0 or greater.");   
-    }
-
-    for (i = 0; i < denominations.length; i++) {
-        while (remaining >= denominations[i]) {
-            if (denominations[i] !== 1) {
-                remaining -= denominations[i];
-                change[i]++;
-            } else {
-                change[i] = remaining;
-                remaining -= remaining;
-            }
-        }
-    }
-
-    return change;
-};
-
-/**
- * Returns the string which is equivalent to the passed string but with
- * all ASCII vowels removed.
- */
-
-function stripVowels(s) {
-    return s.replace(/[aeiou]/ig, "");
-};
-
-/**
- * Randomly permutes a string.
- */
-
-function scramble(s) {
-    var chars = s.split("");
-    for (i = chars.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var c = chars[i];
-      chars[i] = chars[j];
-      chars[j] = c;
-    }
-    return chars.join("");
-};
-
-/**
- * Yields successive powers of two starting at 1 and going up to some
- * limit. Consumes the values with a callback.
- */
-
-function powersOfTwo(limit, f) {
-    for (i = 1; i <= limit; i *= 2) {
-        f(i);
-    }
-};
-
-/**
- * Yields powers of an arbitrary base starting at exponent 0 and going up
- * to some limit. Consumes the values with a callback.
- */
-
-function powers(base, limit, f) {
-    if (base === 1) {
-        f(base);
-    } else {
-        for (i = 1; i <= limit; i *= base) {             
-            f(i);
-        }
-    }
-};
-
-/**
- * Returns an array with all of the values that either powersOfTwo() or
- * powers() would return. Base is optional (if present, use powers(), else
- * use powersOfTwo(). Helper function for testing.
- */
-
-function powerArray(limit, base) {
-    var powerArray = [];
-
-    if (base) {
-        powers(base, limit, function (p) { powerArray.push(p) }); 
-    } else {
-        powersOfTwo(limit, function (p) { powerArray.push(p) });
-    }
-    
-    return powerArray;
-};
-
-/**
- * Interleaves two arrays. If the arrays do not have the same length, the
- * elements of the longer array end up at the end of the result array.
- */
-
-function interleave(a, b) {
-    var c = [];
-    for (i = 0, max = Math.max(a.length, b.length); i < max; i++) {
-        if (i < a.length) {
-            c.push(a[i]);
-        }
-        if (i < b.length) {
-            c.push(b[i]);
-        }
-    }
-    return c;
-};
-
-/**
- * Doubles up each item in an array.
- */
-
-function stutter(array) {
-    return interleave(array, array);
-};
-
-/**
- * Produces a word count object from a string. Apostrophes are included
- * in word count.
- */
-
-function wordCount(string) {
-    var wordCounts = {},
-        words = [];
-
-    words = string.toLowerCase().split(/[^a-zA-Z\']+/);
-
-    for (i = 0; i < words.length; i++) {
-        if (words[i] !== "") {
-            if (words[i] in wordCounts) {
-                wordCounts[words[i]] = wordCounts[words[i]] + 1;
-            } else {
-                wordCounts[words[i]] = 1;
-            }
-        }
-    }
-
-    return wordCounts;
-};
-
-/**
- * Unit tests.
- */
+ //Code available at http://jsfiddle.net/cXbxj/
 
 $(function () {
+ 
+    var i;    //Reuseable i variable;
+
+    /**
+     * Accepts a number of U.S. cents and returns an array containing the  smallest
+     * number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
+     */
+
+    function change(cents) {
+        var remaining = cents,
+            denominations = [25, 10, 5, 1],
+            change = [0, 0, 0, 0];
+        
+        if (cents < 0) {
+             throw new RangeError("The amount of cents must be 0 or greater.");   
+        }
+
+        for (i = 0; i < denominations.length; i++) {
+            while (remaining >= denominations[i]) {
+                if (denominations[i] !== 1) {
+                    remaining -= denominations[i];
+                    change[i]++;
+                } else {
+                    change[i] = remaining;
+                    remaining -= remaining;
+                }
+            }
+        }
+
+        return change;
+    };
+
+    /**
+     * Returns the string which is equivalent to the passed string but with
+     * all ASCII vowels removed.
+     */
+
+    function stripVowels(s) {
+        return s.replace(/[aeiou]/ig, "");
+    };
+
+    /**
+     * Randomly permutes a string.
+     */
+
+    function scramble(s) {
+        var chars = s.split("");
+        for (i = chars.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var c = chars[i];
+          chars[i] = chars[j];
+          chars[j] = c;
+        }
+        return chars.join("");
+    };
+
+    /**
+     * Yields successive powers of two starting at 1 and going up to some
+     * limit. Consumes the values with a callback.
+     */
+
+    function powersOfTwo(limit, f) {
+        for (i = 1; i <= limit; i *= 2) {
+            f(i);
+        }
+    };
+
+    /**
+     * Yields powers of an arbitrary base starting at exponent 0 and going up
+     * to some limit. Consumes the values with a callback.
+     */
+
+    function powers(base, limit, f) {
+        if (base === 1) {
+            f(base);
+        } else {
+            for (i = 1; i <= limit; i *= base) {             
+                f(i);
+            }
+        }
+    };
+
+    /**
+     * Returns an array with all of the values that either powersOfTwo() or
+     * powers() would return. Base is optional (if present, use powers(), else
+     * use powersOfTwo(). Helper function for testing.
+     */
+
+    function powerArray(limit, base) {
+        var powerArray = [];
+
+        if (base) {
+            powers(base, limit, function (p) { powerArray.push(p) }); 
+        } else {
+            powersOfTwo(limit, function (p) { powerArray.push(p) });
+        }
+        
+        return powerArray;
+    };
+
+    /**
+     * Interleaves two arrays. If the arrays do not have the same length, the
+     * elements of the longer array end up at the end of the result array.
+     */
+
+    function interleave(a, b) {
+        var c = [];
+        for (i = 0, max = Math.max(a.length, b.length); i < max; i++) {
+            if (i < a.length) {
+                c.push(a[i]);
+            }
+            if (i < b.length) {
+                c.push(b[i]);
+            }
+        }
+        return c;
+    };
+
+    /**
+     * Doubles up each item in an array.
+     */
+
+    function stutter(array) {
+        return interleave(array, array);
+    };
+
+    /**
+     * Produces a word count object from a string. Apostrophes are included
+     * in word count.
+     */
+
+    function wordCount(string) {
+        var wordCounts = {},
+            words = [];
+
+        words = string.toLowerCase().split(/[^a-zA-Z\']+/);
+
+        for (i = 0; i < words.length; i++) {
+            if (words[i] !== "") {
+                if (words[i] in wordCounts) {
+                    wordCounts[words[i]] = wordCounts[words[i]] + 1;
+                } else {
+                    wordCounts[words[i]] = 1;
+                }
+            }
+        }
+
+        return wordCounts;
+    };
+
+    /**
+     * Unit tests.
+     */
 
     var anagram = function (s, t) {
         if (s.length !== t.length) {
