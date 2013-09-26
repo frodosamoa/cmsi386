@@ -1,4 +1,4 @@
-### Homework 1
+## Homework 1
 
 For the first homework assignment, you'll be warming up to Python. Readings: Read as many on-line tutorials or book chapters on Python as is reasonable without seriously impacting your personal life.
 
