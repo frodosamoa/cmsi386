@@ -1,5 +1,8 @@
 ## Homework 2
 
+1st jsfiddle: http://jsfiddle.net/cXbxj/
+2nd jsfiddle: http://jsfiddle.net/DPnGk/
+
 For this homework assignment, you'll be warming up to JavaScript. 
 
 Provide the code online as well in two jsfiddles: one for problems 1-9 and one for problem 10. You may use jQuery.
