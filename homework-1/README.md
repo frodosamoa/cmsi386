@@ -2,7 +2,7 @@
 
 For the first homework assignment, you'll be warming up to Python. Readings: Read as many on-line tutorials or book chapters on Python as is reasonable without seriously impacting your personal life.
 
-Produce your solutions in four files: pythonwarmup.py, prefixes.py, lines.py, and pythonwarmuptest.py. Turn in a hardcopy (8.5" ")
+Produce your solutions in four files: pythonwarmup.py, prefixes.py, lines.py, and pythonwarmuptest.py.
 
 1. Write a Python function that accepts a number of U.S. cents and returns a tuple containing, respectively, the smallest number of U.S. quarters, dimes, nickels, and pennies that equal the given amount. Use the Python divmod built-in function.
 
