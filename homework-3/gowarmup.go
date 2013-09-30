@@ -6,26 +6,26 @@ func change(cents) {
 	
 }
 
-func stripVowels(string) {
+func stripVowels(s string) string {
 	
 }
 
-func scramble(string) {
+func scramble(s string) string {
 	
 }
 
-func powersOfTwo(limit) {
+func powersOfTwo(limit int) {
 	
 }
 
-func powers(base, limit) {
+func powers(base int, limit int) {
 	
 }
 
-func interleave(array1, array2) {
+func interleave(a array, b array) {
 	
 }
 
-func stutter(array) {
+func stutter(a array) {
 	
 }
