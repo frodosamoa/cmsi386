@@ -2,8 +2,6 @@
 
 $(function () {
  
-    var i;    //Reuseable i variable;
-
     /**
      * Accepts a number of U.S. cents and returns an array containing the  smallest
      * number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
@@ -11,26 +9,20 @@ $(function () {
 
     function change(cents) {
         var remaining = cents,
-            denominations = [25, 10, 5, 1],
-            change = [0, 0, 0, 0];
+            denoms = [25, 10, 5];
         
         if (cents < 0) {
              throw new RangeError("The amount of cents must be 0 or greater.");   
         }
 
-        for (i = 0; i < denominations.length; i++) {
-            while (remaining >= denominations[i]) {
-                if (denominations[i] !== 1) {
-                    remaining -= denominations[i];
-                    change[i]++;
-                } else {
-                    change[i] = remaining;
-                    remaining -= remaining;
-                }
-            }
-        }
+        var quarters = Math.floor(remaining % denoms[0]);
+        remaining %= denoms[0];
+        var dimes = Math.floor(remaining % denoms[0]);
+        remaining %= denoms[1];
+        var nickels = Math.floor(remaining % denoms[0]);
+        var pennies = remaining % denoms[2];
 
-        return change;
+        return [quarters, nickels, dimes, pennies];
     };
 
     /**
@@ -47,14 +39,14 @@ $(function () {
      */
 
     function scramble(s) {
-        var chars = s.split("");
-        for (i = chars.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var c = chars[i];
-          chars[i] = chars[j];
-          chars[j] = c;
+        var a = s.split("");
+        for (var i = a.length; i > 0; i--) {
+          var j = Math.floor(Math.random() * i);
+          var c = a[i];
+          a[i] = a[j];
+          a[j] = c;
         }
-        return chars.join("");
+        return a.join("");
     };
 
     /**
@@ -63,7 +55,7 @@ $(function () {
      */
 
     function powersOfTwo(limit, f) {
-        for (i = 1; i <= limit; i *= 2) {
+        for (var i = 1; i <= limit; i *= 2) {
             f(i);
         }
     };
@@ -77,7 +69,7 @@ $(function () {
         if (base === 1) {
             f(base);
         } else {
-            for (i = 1; i <= limit; i *= base) {             
+            for (var i = 1; i <= limit; i *= base) {             
                 f(i);
             }
         }
@@ -108,13 +100,9 @@ $(function () {
 
     function interleave(a, b) {
         var c = [];
-        for (i = 0, max = Math.max(a.length, b.length); i < max; i++) {
-            if (i < a.length) {
-                c.push(a[i]);
-            }
-            if (i < b.length) {
-                c.push(b[i]);
-            }
+        for (var i = 0, max = Math.max(a.length, b.length); i < max; i++) {
+            if (i < a.length) c.push(a[i]);
+            if (i < b.length) c.push(b[i]);
         }
         return c;
     };
@@ -138,7 +126,7 @@ $(function () {
 
         words = string.toLowerCase().split(/[^a-zA-Z\']+/);
 
-        for (i = 0; i < words.length; i++) {
+        for (var i = 0; i < words.length; i++) {
             if (words[i] !== "") {
                 if (words[i] in wordCounts) {
                     wordCounts[words[i]] = wordCounts[words[i]] + 1;
