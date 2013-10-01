@@ -1,29 +1,30 @@
- //Code available at http://jsfiddle.net/cXbxj/
+//Code available at http://jsfiddle.net/cXbxj/
 
 $(function () {
- 
+
     /**
      * Accepts a number of U.S. cents and returns an array containing the  smallest
      * number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
      */
 
     function change(cents) {
-        var remaining = cents,
+        var quarters, dimes, nickels, pennies,
+            remaining = cents,
             denoms = [25, 10, 5];
-        
+
         if (cents < 0) {
              throw new RangeError("The amount of cents must be 0 or greater.");   
         }
 
-        var quarters = Math.floor(remaining % denoms[0]);
+        quarters = Math.floor(remaining % denoms[0]);
         remaining %= denoms[0];
-        var dimes = Math.floor(remaining % denoms[0]);
+        dimes = Math.floor(remaining % denoms[1]);
         remaining %= denoms[1];
-        var nickels = Math.floor(remaining % denoms[0]);
-        var pennies = remaining % denoms[2];
+        nickels = Math.floor(remaining % denoms[2]);
+        pennies = remaining % denoms[2];
 
         return [quarters, nickels, dimes, pennies];
-    };
+    } ;
 
     /**
      * Returns the string which is equivalent to the passed string but with
@@ -39,13 +40,16 @@ $(function () {
      */
 
     function scramble(s) {
-        var a = s.split("");
-        for (var i = a.length; i > 0; i--) {
-          var j = Math.floor(Math.random() * i);
-          var c = a[i];
-          a[i] = a[j];
-          a[j] = c;
+        var i, j, c,
+            a = s.split("");
+
+        for (i = a.length; i > 0; i -= 1) {
+            j = Math.floor(Math.random() * i);
+            c = a[i];
+            a[i] = a[j];
+            a[j] = c;
         }
+
         return a.join("");
     };
 
@@ -55,7 +59,9 @@ $(function () {
      */
 
     function powersOfTwo(limit, f) {
-        for (var i = 1; i <= limit; i *= 2) {
+        var i;
+
+        for (i = 1; i <= limit; i *= 2) {
             f(i);
         }
     };
@@ -66,10 +72,12 @@ $(function () {
      */
 
     function powers(base, limit, f) {
+        var i;
+
         if (base === 1) {
             f(base);
         } else {
-            for (var i = 1; i <= limit; i *= base) {             
+            for (i = 1; i <= limit; i *= base) {
                 f(i);
             }
         }
@@ -82,15 +90,15 @@ $(function () {
      */
 
     function powerArray(limit, base) {
-        var powerArray = [];
+        var a = [];
 
         if (base) {
-            powers(base, limit, function (p) { powerArray.push(p) }); 
+            powers(base, limit, function (p) { a.push(p) } ); 
         } else {
-            powersOfTwo(limit, function (p) { powerArray.push(p) });
+            powersOfTwo(limit, function (p) { a.push(p) } );
         }
-        
-        return powerArray;
+
+        return a;
     };
 
     /**
@@ -99,11 +107,14 @@ $(function () {
      */
 
     function interleave(a, b) {
-        var c = [];
-        for (var i = 0, max = Math.max(a.length, b.length); i < max; i++) {
-            if (i < a.length) c.push(a[i]);
-            if (i < b.length) c.push(b[i]);
+        var i, max,
+            c = [];
+
+        for (i = 0, max = Math.max(a.length, b.length); i < max; i += 1) {
+            if (i < a.length) { c.push(a[i]); }
+            if (i < b.length) { c.push(b[i]); }
         }
+
         return c;
     };
 
@@ -121,21 +132,17 @@ $(function () {
      */
 
     function wordCount(string) {
-        var wordCounts = {},
+        var i,
+            wordCounts = {},
             words = [];
 
-        words = string.toLowerCase().split(/[^a-zA-Z\']+/);
+        words = string.toLowerCase().split(/[^a-z']+/);
 
-        for (var i = 0; i < words.length; i++) {
-            if (words[i] !== "") {
-                if (words[i] in wordCounts) {
-                    wordCounts[words[i]] = wordCounts[words[i]] + 1;
-                } else {
-                    wordCounts[words[i]] = 1;
-                }
-            }
+        for (i = 0; i < words.length; i += 1) {
+            wordCounts[words[i]] = wordCounts.hasOwnProperty(words[i]) ? wordCounts[words[i]] + 1 : 1;
         }
 
+        delete wordCounts[""];
         return wordCounts;
     };
 
@@ -168,7 +175,7 @@ $(function () {
         deepEqual(stripVowels("Hello, world"), "Hll, wrld");
         deepEqual(stripVowels("I like turtles"), " lk trtls");
         deepEqual(stripVowels("aeiou"), "");
-        deepEqual(stripVowels("bcdfghjklmnpqrstvwxyz"), "bcdfghjklmnpqrstvwxyz");      
+        deepEqual(stripVowels("bcdfghjklmnpqrstvwxyz"), "bcdfghjklmnpqrstvwxyz");
         deepEqual(stripVowels("abecidoeuf"), "bcdf");
         deepEqual(stripVowels("Happiness depends upon ourselves"), "Hppnss dpnds pn rslvs");
         deepEqual(stripVowels("Chrononhotonthologos"), "Chrnnhtnthlgs");
@@ -178,7 +185,7 @@ $(function () {
     });
 
     test("Scramble Tests", function () {
-        var data = ["", "a", "rat", "zzz", "^*&^*&^▱ÄÈËɡɳɷ", "I like turtles", "Happiness depends upon ourselves."]
+        var data = ["", "a", "rat", "zzz", "^*&^*&^▱ÄÈËɡɳɷ", "I like turtles", "Happiness depends upon ourselves."];
         data.forEach(function (s) {
             ok(anagram(s, scramble(s)));
         });
