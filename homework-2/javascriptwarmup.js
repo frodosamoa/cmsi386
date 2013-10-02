@@ -8,7 +8,7 @@ $(function () {
      */
 
     function change(cents) {
-        var quarters, dimes, nickels, pennies,
+        var quarters, dimes, nickels, pennies = 0,
             remaining = cents,
             denoms = [25, 10, 5];
 
@@ -107,12 +107,13 @@ $(function () {
      */
 
     function interleave(a, b) {
-        var i, max,
+        var i, 
+            max,
             c = [];
 
         for (i = 0, max = Math.max(a.length, b.length); i < max; i += 1) {
-            if (i < a.length) { c.push(a[i]); }
-            if (i < b.length) { c.push(b[i]); }
+            if (i < a.length) c.push(a[i]);
+            if (i < b.length) c.push(b[i]);
         }
 
         return c;
