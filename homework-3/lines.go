@@ -14,18 +14,22 @@ func numberOfLines() int {
 		lineLen := len(scanner.Text())
 		if lineLen > 1 { // two or more chars
 			firstChar, secondChar := scanner.Text()[0], scanner.Text()[1]
-			if firstChar == '/' { // potential comment?
-				if secondChar == '*' { // block comment
+			if firstChar == '/' { // comment
+				if secondChar == '*' { // comment block
 					block = true
-				} else if !block && secondChar != '/' { // not comment line
+				} else if secondChar != '/' { // comment line
 					count += 1
-				} 
-			} else if firstChar == '*' && secondChar == '/' { // end of comment block?
-				block = false
-			} else {	
+				}
+			} else if firstChar == '*' { // end of comment block?
+				if secondChar == '/' {
+					block = false
+				} else {
+					count += 1
+				}
+			} else {
 				count += 1
 			}
-		} else if !block && lineLen > 0 {
+		} else if !block && lineLen > 0 { 
 			count += 1
 		}
 	}
