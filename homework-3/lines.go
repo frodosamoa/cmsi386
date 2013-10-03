@@ -10,29 +10,24 @@ import (
 func numberOfLines() int {
 	scanner, count, block := bufio.NewScanner(os.Stdin), 0, false
 
-	for scanner.Scan() {
-
-		// current line non empty?
-		if len(scanner.Text()) > 0 {
-			// current line longer than one character?
-			if len(scanner.Text()) > 1 {
-				// does the first cahracter indicate a potential comment?
-				if scanner.Text()[0] == '/' {
-					if scanner.Text()[1] != '/' { // non empty non commented line starting with '/''
-						count += 1
-					} else if scanner.Text()[1] == '*' { // block comment
-						block = true
-					} 
-				// or does the first character a '*' indicating the end of a comment block?
-				} else if scanner.Text()[0] == '*' {
-					if block && scanner.Text()[1] == '/' {
-					    block = false
-					}
-				} else { // non empty non commented line
+	for scanner.Scan() { // while we have more lines
+		lineLen := len(scanner.Text())
+		if lineLen > 1 { // two or more chars
+			firstChar, secondChar := scanner.Text()[0], scanner.Text()[1]
+			if firstChar == '/' { // potential comment?
+				if secondChar == '*' { // block comment
+					block = true
+				} else if !block && secondChar != '/' { // not comment line
 					count += 1
-				}
+				} 
+			} else if firstChar == '*' && secondChar == '/' { // end of comment block?
+				block = false
+			} else {	
+				count += 1
 			}
-		} 
+		} else if !block && lineLen > 0 {
+			count += 1
+		}
 	}
 
 	if err := scanner.Err(); err != nil {
