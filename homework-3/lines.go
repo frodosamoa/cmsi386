@@ -7,31 +7,17 @@ import (
 	"bufio"
 )
 
-func numberOfLines() int {
-	scanner, count, block := bufio.NewScanner(os.Stdin), 0, false
+// Figure out way to pass the first commandline argument in to the top function
 
-	for scanner.Scan() { // while we have more lines
-		lineLen := len(scanner.Text())
-		if lineLen > 1 { // two or more chars
-			firstChar, secondChar := scanner.Text()[0], scanner.Text()[1]
-			if firstChar == '/' { // comment
-				if secondChar == '*' { // comment block
-					block = true
-				} else if secondChar != '/' { // comment line
-					count += 1
-				}
-			} else if firstChar == '*' { // end of comment block?
-				if secondChar == '/' {
-					block = false
-				} else {
-					count += 1
-				}
-			} else {
+func numberOfLines() int {
+	scanner, count := bufio.NewScanner(os.Stdin), 0
+
+	for scanner.Scan() { 
+		if len(scanner.Text()) > 0 { 
+			if scanner.Text()[0] != '#' {
 				count += 1
 			}
-		} else if !block && lineLen > 0 { 
-			count += 1
-		}
+		} 
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -40,6 +26,9 @@ func numberOfLines() int {
 
 	return count
 }
+
+/* Reports the number of non-blank, non-commented lines in the
+   file named by the first argument. */
 
 func main() {
 	fmt.Println(numberOfLines())
