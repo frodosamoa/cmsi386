@@ -1,8 +1,8 @@
 package gowarmup
 
 import (
-	"testing" 
-	"fmt"
+	"testing"
+	"fmt" 
 )
 
 func testEq(a, b []int) bool {
@@ -19,12 +19,20 @@ func testEq(a, b []int) bool {
     return true
 }
 
-func testChange(t *testing.T) {
-	cents := change(97)
-	fmt.Println(cents)
-	change := []int{3, 2, 0, 2}
-	if (testEq(cents, change)) {
-		t.Errorf("Expected [3, 2, 0, 2] got ", change)
+var changeTests = []struct {
+        in  []int
+        out []int
+}{
+        {change(97), []int{3, 2, 0, 2}},
+        {change(8), []int{0, 0, 1, 3)}
+}
+
+
+func TestChange(t *testing.T) {
+    for i, change := range changeTests {
+		if (testEq(change.in, change.out)) {
+			t.Errorf("Expected %s got %s", change.in, change.out)
+		}
 	}
 }
 
