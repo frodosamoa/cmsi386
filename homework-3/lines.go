@@ -5,18 +5,16 @@ import (
 	"log"
 	"os"
 	"bufio"
+	"strings"
 )
-
-// Figure out way to pass the first commandline argument in to the top function
 
 func numberOfLines() int {
 	scanner, count := bufio.NewScanner(os.Stdin), 0
 
 	for scanner.Scan() { 
-		if len(scanner.Text()) > 0 { 
-			if scanner.Text()[0] != '#' {
-				count += 1
-			}
+		line := strings.TrimSpace(scanner.Text())
+		if len(line) > 0 && line[0] != '#' {
+			count += 1
 		} 
 	}
 
