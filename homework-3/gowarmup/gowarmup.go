@@ -53,7 +53,7 @@ func random(min, max int) int {
 
 // Yields successive powers of two starting at 1 and going up to some limit, consumed with a callback.
 
-func powersOfTwo(limit int, f func(int) int) {
+func powersOfTwo(limit int, f func(int)) {
     for i := 1; i <= limit; i *= 2 {
         f(i)
     }	
@@ -61,7 +61,7 @@ func powersOfTwo(limit int, f func(int) int) {
 
 // Yields powers of an arbitrary base starting at exponent 0 and going up to some limit, consumed with a callback.
 
-func powers(base int, limit int, f func(int) int) {
+func powers(base int, limit int, f func(int)) {
     if base == 1 {
         f(base)
     } else {
