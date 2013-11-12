@@ -1,0 +1,188 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+\usepackage{qtree}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{titling}
+\usepackage{hyperref}
+
+\usepackage{textcomp}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\setlength{\droptitle}{-10em}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\title{Homework 4}
+\author{Andrew Kowalczyk}
+\date{October 31, 2013}						
+
+\begin{document}
+\lstset{
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=4,                       
+}
+
+\maketitle
+\section{Abstract Syntax Tree}
+(a = 3) >= m >= ! \& 4 * \textasciitilde 6 || y \%= 7 \^{} 6 \& p
+\vspace{5mm}
+\begin{center}
+\vspace{0.4in}
+\begin{tikzpicture}[level distance=2cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=2cm},
+  level 4/.style={sibling distance=1cm},
+  level 5/.style={sibling distance=1cm},
+  level 6/.style={sibling distance=3cm}
+]
+  \node {\%=}
+   child {node {||}
+     child {node {>=}
+       child {node{>=}
+          child{node{=}
+            child{node{a}}
+            child{node{3}}
+          }
+          child {node{m}}
+       }
+       child {node{*}
+         child {node{!}
+           child{node{\&}
+             child{node{4}}
+           }
+         }
+         child {node{\(\sim\)}
+           child{node{6}}
+         }
+       }
+     }
+      child {node {y}}
+   }
+    child {node {\^{}}
+      child {node {7}}
+      child {node {\&}
+        child {node {6}}
+        child {node {p}}
+      }
+    };
+\end{tikzpicture}
+\end{center}
+
+
+\section{Javascript semicolon questions}
+\subsection{}
+When trying to call the function f(), it returns undefined. Javascript inserts semicolons into the program as so:
+\begin{lstlisting}
+function f() {
+    return;
+    {x: 5};
+}
+\end{lstlisting}
+Python would remedy this because one would receive an indentation error trying to run the Python equivalent of code.
+
+\subsection{}
+When trying to evaluate this expression, we receive this error TypeError: Property 'b' of object \#<Object> is not a function. Javascript inserts semicolons into the program and interprets it as so: 
+\begin{lstlisting}
+var b = 8;
+var a = b + b(4 + 5).toString(16);
+\end{lstlisting}
+Python would remedy this because the lexical definition of statements says that logical lines end in with a newline.
+
+\subsection{}
+After trying to evaluate the program, we receive this error, TypeError: 'undefined' is not an object (evaluating '"mundo" ["Hola", "Ciao"].forEach'). This is because it is attempting to use the ["Hola", "Ciao"] as indexer operator to "mundo".
+Again, Python would remedy this because the lexical definition of statements say that logical lines end in with a newline.
+
+\subsection{}
+When trying to evaluate this, we are alerted with "Goodbye" then "Hello". This is because sayHello is called with the anonymous function below due to being in a closure. Javascript interprets the code as this:
+\begin{lstlisting}
+var sayHello = function () {
+    console.log("Hello")
+}
+
+(function() {
+    console.log("Goodbye")
+}(sayHello))
+\end{lstlisting}
+
+\section{What if local variables were allocated in static storage?}
+Consider this code:
+\lstinputlisting[language=C]{static.c}
+The program prints out 0. If local variables were allowed in static storage, the program would print out 1.
+
+\section{Scoping}
+\subsection{Static Scoping}
+It would print out 1122 since the second setX() call changes the global variable to 2.
+\subsection{Dynamic Scoping}
+It would print out 1121 since the second setX() call only changes the local variable x.
+
+\section{Binding within dynamic scoping}
+Consider this python code:
+\lstinputlisting[language=Python]{parallel.py}
+If Python were to evaluate the the function first which would assign the global a to 0, then the expression could yield different results. If the lookup for a were to happen first, then a would stay as 4.
+
+\section{Explain the C declarations}
+
+\subsection{double *a[n];}
+This is an array of n pointers to doubles.
+\subsection{double (*b)[n];}
+This is a pointer to an array of n doubles.
+\subsection{double (*c[n])();}
+This is an array of n pointers pointing to functions returning a double.
+\subsection{double (*d())[n];}
+This is a function returning a pointer to an array of n doubles.
+
+\section{Rewrite problem 6 in Go}
+\subsection{var a [n]*float64}
+\subsection{var b (*)[n]float64}
+\subsection{var c [n] *func()float64}
+\subsection{var d func() (*[n]float64)}
+
+\section{Convert from infix (-b + sqrt(4 $\times$ a $\times$ c)) / (2 $\times$ a)}
+
+\subsection{Postfix}
+0 b -  c 4 a $\times \times$ sqrt + 2 a $\times$ /
+\subsection{Prefix}
+/ $\times$ 2 a + - 0 b sqrt $\times \times$ 4 a c
+\subsection{Do you need a special symbol for unary negation? Why or why not?}
+There are two options. If you make parentheses required, you must assign another symbol for unary negation like \textasciitilde. If you don't make them required, you can simply subtract from 0.
+
+\section{Interleave using C-Style arrays}
+Code available at \url{http://codepad.org/Fw4xASrh} and on my github.
+\lstinputlisting[language=C++]{interleave-cstyle.cpp}
+
+\section{Interleave using C++ vectors}
+Code available at \url{http://codepad.org/P6KKMBqY} and on my github.
+\lstinputlisting[language=C++]{interleave-vector.cpp}
+
+\end{document}  
