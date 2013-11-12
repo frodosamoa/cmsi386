@@ -24,18 +24,18 @@ int main () {
 
 	int a[50], b[50], c[100], lena, lenb, lenc, i;
 
-	cout << "Input number of elements in first array\n";
+	cout << "Input number of elements in first array" << endl;
 	scanf("%d", &lena);
 
-	cout << "Input " << lena << " integers\n";
+	cout << "Input " << lena << " integers" << endl;
 	for (i = 0; i < lena; i++) {
 		scanf("%d", &a[i]);
 	}
 
-	cout << "Input number of elements in second array\n";
+	cout << "Input number of elements in second array" << endl;
 	scanf("%d", &lenb);
 
-	cout << "Input " << lenb << " integers\n";
+	cout << "Input " << lenb << " integers" << endl;
 	for (i = 0; i < lenb; i++) {
 		scanf("%d", &b[i]);
 	}
