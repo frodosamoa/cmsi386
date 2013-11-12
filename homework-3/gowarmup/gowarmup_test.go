@@ -67,6 +67,16 @@ func powersOfTwoArray(limit int) []int {
 	return powerOfTwoArray
 }
 
+// Helper function for tests that use arrays of structs composed of two int arrays.
+
+func testIntArrayStruct(tests []struct{actual []int; expected []int}, t *testing.T) {
+    for i, test := range tests {
+		if !testIntArrayEq(test.actual, test.expected) {
+			t.Errorf("Test %d: expected %v got %v", i, test.actual, test.expected)
+		}
+	}
+}
+
 
 // Test are stored in structs for table driven testing. Each one is formatted
 // as so. Actual output, then the expected output, denoted by those respecive
@@ -169,18 +179,8 @@ var stutterTests = []struct {
 
 // TESTS
 
-// Helper function for tests that use arrays of structs composed of two int arrays.
-
-func testArrayStructs(tests []struct{actual []int; expected []int}, t *testing.T) {
-    for i, test := range tests {
-		if !testIntArrayEq(test.actual, test.expected) {
-			t.Errorf("Test %d: expected %v got %v", i, test.actual, test.expected)
-		}
-	}
-}
-
 func TestChange(t *testing.T) {
-	testArrayStructs(changeTests, t)
+	testIntArrayStruct(changeTests, t)
 }
 
 func TestStripVowels(t *testing.T) {
@@ -200,17 +200,17 @@ func TestScramble(t *testing.T) {
 }
 
 func TestPowersOfTwo(t *testing.T) {
-	testArrayStructs(powersOfTwoTests, t)
+	testIntArrayStruct(powersOfTwoTests, t)
 }
 
 func TestPowers(t *testing.T) {
-	testArrayStructs(powersTests, t)
+	testIntArrayStruct(powersTests, t)
 }
 
 func TestInterleave(t *testing.T) {
-	testArrayStructs(interleaveTests, t)
+	testIntArrayStruct(interleaveTests, t)
 }
 
 func TestStutter(t *testing.T) {
-	testArrayStructs(stutterTests, t)
+	testIntArrayStruct(stutterTests, t)
 }
