@@ -146,7 +146,7 @@ It would print out 1122 since the second setX() call changes the global variable
 \subsection{Dynamic Scoping}
 It would print out 1121 since the second setX() call only changes the local variable x.
 
-\section{Binding within dynamic scoping}
+\section{Compiler operation order}
 Consider this python code:
 \lstinputlisting[language=Python]{parallel.py}
 If Python were to evaluate the the function first which would assign the global a to 0, then the expression could yield different results. If the lookup for a were to happen first, then a would stay as 4.
