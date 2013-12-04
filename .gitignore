@@ -2,9 +2,8 @@
 /homework-1/*.pyc
 /notes/*
 homework-4/homework4.aux
-
 *.log
-
 *.out
-
 *.gz
+*.aux
+*.fdb_latexmk
