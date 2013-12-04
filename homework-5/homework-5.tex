@@ -1,11 +1,39 @@
-\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
-\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
-\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
-%\geometry{landscape}                		% Activate for for rotated page geometry
-%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
-\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
-								% TeX will automatically convert eps --> pdf in pdflatex		
+\documentclass[11pt, oneside]{article} 
+\usepackage{geometry}               
+\geometry{letterpaper}                  
+\usepackage{graphicx}	
 \usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+\usepackage{titling}
+
+\setlength{\droptitle}{-10em}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
 
 \title{Homework 5}
 \author{Andrew Kowalczyk}
@@ -13,19 +41,63 @@
 
 \begin{document}
 \maketitle
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
+
+\section*{3}
+\subsection*{Python}
+\lstinputlisting[language=Python]{code/list_min.py}
+
+\subsection*{C}
+\lstinputlisting[language=C]{code/arraymin.c}
+
+\subsection*{Javascript}
+\lstinputlisting{code/arraymin.js}
+
+\subsection*{Go}
+\lstinputlisting{code/ArrayMin.go}
+
+\section*{4}
+% We run the risk of getting stuck in an infinite loop.
+
+\section*{5}
+\subsection*{Javascript}
+\lstinputlisting{code/subroutineOrder.js}
+
+We can see after running this code in a shell or jsFiddle that JavaScript evaluate subroutines in the order that they are passed into a function (left-to-right).
+
+\section*{6}
+If the program outputs $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$ this is how the program runs: It first pushes the return address of i on the stack (which is 0). Print i out. The increment it by 1. When foo is called a second time, it looks up the variable i again and simply increments it. If the program ran in this way, it is likely that the stack was cleared when the program was run.
+
+There is also a possibily that one can see all zeroes. This is because when the program allocated a stack frame for the  this, it allocated it in such a place where it just so happened to be 0. Basiclly, the i overlayed the j in memory. This could mean that the stack was not initialized on that particular system.
+
+\section*{8}
+The old version of Fortran printed 3 because it passed by reference. The modern version of Fortran prints 2 because it passes pointers to copies of rvalues. This is due to the fact that the compiler placed the value of the literal 2 somewhere in memory when foo was first called. Whenever there is 2 in the program, the compiler told it to look in that memory address. The value was changed when foo was called thus explaining why it printed 3.
+
+\section*{10}
+\subsection*{Call by value}
+$1, [2, 3, 4]$ is printed.
+
+\subsection*{Call by value-result}
+$2, [2, 3, 4]$ is printed.
+
+\subsection*{Call by reference}
+$2, [2, 2, 4]$ is printed.
+
+\subsection*{Call by name}
+$2, [2, 2, 4]$ is printed.
+
+\section*{11}
+
+\section*{12 - XC}
+This is a bad idea because an object should not (cannot) have more than one class. As opposed to inheritance (\textit{i.e. IS-A}), this society of classes should be built by aggregation (\textit{i.e. HAS-A}). Aggregation should not be confused with composition. In other words, each $Person$ HAS-A $Job$. The class $Job$ can live it on its own without a $Person$ having that particular $Job$. Each $Job$ will have its own class to store properties specific to that $Job$. The person class should be the only class denoting a person. This person class can have its set of jobs or roles as a property.
+
+\section*{13}
+% look at old quizzes for help
+
+\subsection*{Java}
+\lstinputlisting[language=Java]{code/OddGenerator.java}
+\subsection*{Python}
+\subsection*{Javascript}
+\lstinputlisting{code/nextOdd.js}
+\subsection*{C++}
+
 \end{document}  
