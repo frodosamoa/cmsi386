@@ -1,16 +1,6 @@
-// Code available at http://play.golang.org/p/5EoKCHBCeT
+// Function in action at http://play.golang.org/p/KU4Jn1Qkcx
 
-package main
-
-import "fmt"
-
-const MaxInt = int(^uint(0) >> 1)
-
-func ArrayMin(a []int) int {
-	return MinFinder(a, MaxInt)
-}
-
-func MinFinder(a []int, min int) int {	
+func ArrayMin(a []int, min int) int {	
 	if (len(a) == 0) {
 		return min
 	} else {
@@ -18,12 +8,5 @@ func MinFinder(a []int, min int) int {
 			min = a[0]
 		}
 	}
-	return MinFinder(a[1:], min)
-}
-
-func main() {
-	a := []int{5, 6, 7, 12, 3, 1}
-	b := []int{-432, 3, 1, 234}
-	c := []int{-12, -11, -4, 1344234}
-	fmt.Println(ArrayMin(a), ArrayMin(b), ArrayMin(c))
+	return ArrayMin(a[1:], min)
 }
