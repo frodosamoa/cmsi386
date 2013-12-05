@@ -1,5 +1,5 @@
-var a = function () {alert("first");};
-var b = function () {alert("second");};
+var left = function () {alert("left");};
+var right = function () {alert("right");};
 var both = function (a, b) {};
 
-both(a(), b());
+both(left(), right());
