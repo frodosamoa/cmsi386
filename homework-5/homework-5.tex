@@ -43,7 +43,6 @@
 \maketitle
 
 \section*{3}
-
 For C and Go, go to the links provided to see the function in action. Codepad for C and play.golang.org for Go.
 
 \subsection*{Python}
@@ -68,12 +67,12 @@ There is a possibility of getting stuck in an infinite loop. The user would pote
 We can see after running this code in a shell or jsFiddle that JavaScript evaluate subroutines in the order that they are passed into a function (left-to-right).
 
 \section*{6}
-If the program outputs $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$ this is how the program runs: It first pushes the return address of i on the stack (which is 0). Print i out. The increment it by 1. When foo is called a second time, it looks up the variable i again and simply increments it. If the program ran in this way, it is likely that the stack was cleared when the program was run.
+If the program outputs $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$ this is how the program runs: It first pushes the return address of i on the stack (which is 0). Print i out. The increment it by 1. When foo is called a second time, it looks up the variable i again and simply increments it. Basically, the i overlayed the j in memory. If the program ran in this way, it is likely that the stack was cleared when the program was run.
 
-There is also a possibily that one can see all zeroes. This is because when the program allocated a stack frame for the  this, it allocated it in such a place where it just so happened to be 0. Basiclly, the i overlayed the j in memory. This could mean that the stack was not initialized on that particular system.
+There is also a possibility that one can see all zeroes. This is because when the program allocated a stack frame for the i, it allocated it in such a place where it just so happened to be 0. This could mean that the stack was not initialized on that particular system.
 
 \section*{8}
-The old version of Fortran printed 3 because it passed by reference. The modern version of Fortran prints 2 because it passes pointers to copies of rvalues. This is due to the fact that the compiler placed the value of the literal 2 somewhere in memory when foo was first called. Whenever there is 2 in the program, the compiler told it to look in that memory address. The value was changed when foo was called thus explaining why it printed 3.
+The old version of Fortran printed 3 because it passed by reference. The modern version of Fortran prints 2 because it passes pointers to copies of rvalues. This is due to the fact that the compiler put the value of 2 (literal) in memory when foo was first called. Whenever there is 2 in the program, the compiler told it to look in that memory address. The value was changed when foo was called thus explaining why it printed 3.
 
 \section*{10}
 \subsection*{Call by value: $1, [2, 3, 4]$ is printed.}
@@ -82,6 +81,7 @@ The old version of Fortran printed 3 because it passed by reference. The modern 
 \subsection*{Call by name: $2, [2, 3, 4]$ is printed.}
 
 \section*{11}
+\lstinputlisting[language=Java]{code/queue.js}
 
 \section*{12 - XC}
 This is a bad idea because an object should not (cannot) have more than one class. As opposed to inheritance (\textit{i.e. IS-A}), this society of classes should be built by aggregation (\textit{i.e. HAS-A}). Aggregation should not be confused with composition. In other words, each $Person$ HAS-A $Job$. The class $Job$ can live it on its own without a $Person$ having that particular $Job$. Each $Job$ will have its own class to store properties specific to that $Job$. The person class should be the only class denoting a person. This person class can have its set of jobs or roles as a property.
