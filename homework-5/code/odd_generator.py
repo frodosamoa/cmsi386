@@ -1,13 +1,11 @@
-class odd_generator:
-	def __init__(self):
-		self.__x = -1
+def odd_generator():
+	odd = {'current' : -1}
+	def next_odd(): odd['current'] += 2; print odd['current']
+	return next_odd
 
-	def next_odd(self):
-		self.__x = self.__x + 2
-		return self.__x
+a = odd_generator()
 
-z = odd_generator()
-print z.next_odd()
-print z.next_odd()
-print z.next_odd()
-print z.next_odd()
+a()
+a()
+a()
+a()
