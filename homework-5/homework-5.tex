@@ -43,6 +43,9 @@
 \maketitle
 
 \section*{3}
+
+For C and Go, go to the links provided to see the function in action. Codepad for C and play.golang.org for Go.
+
 \subsection*{Python}
 \lstinputlisting[language=Python]{code/list_min.py}
 
@@ -50,13 +53,13 @@
 \lstinputlisting[language=C]{code/arraymin.c}
 
 \subsection*{Javascript}
-\lstinputlisting{code/arraymin.js}
+\lstinputlisting{code/arrayMin.js}
 
 \subsection*{Go}
 \lstinputlisting{code/ArrayMin.go}
 
 \section*{4}
-% We run the risk of getting stuck in an infinite loop.
+There is a possibility of getting stuck in an infinite loop. The user would potentially need to stop the program on their own if this were to happen.
 
 \section*{5}
 \subsection*{Javascript}
@@ -73,17 +76,10 @@ There is also a possibily that one can see all zeroes. This is because when the 
 The old version of Fortran printed 3 because it passed by reference. The modern version of Fortran prints 2 because it passes pointers to copies of rvalues. This is due to the fact that the compiler placed the value of the literal 2 somewhere in memory when foo was first called. Whenever there is 2 in the program, the compiler told it to look in that memory address. The value was changed when foo was called thus explaining why it printed 3.
 
 \section*{10}
-\subsection*{Call by value}
-$1, [2, 3, 4]$ is printed.
-
-\subsection*{Call by value-result}
-$2, [2, 3, 4]$ is printed.
-
-\subsection*{Call by reference}
-$2, [2, 2, 4]$ is printed.
-
-\subsection*{Call by name}
-$2, [2, 2, 4]$ is printed.
+\subsection*{Call by value: $1, [2, 3, 4]$ is printed.}
+\subsection*{Call by value-result: $2, [2, 2, 4]$ is printed.}
+\subsection*{Call by reference: $2, [2, 3, 4]$ is printed.}
+\subsection*{Call by name: $2, [2, 3, 4]$ is printed.}
 
 \section*{11}
 
@@ -91,13 +87,14 @@ $2, [2, 2, 4]$ is printed.
 This is a bad idea because an object should not (cannot) have more than one class. As opposed to inheritance (\textit{i.e. IS-A}), this society of classes should be built by aggregation (\textit{i.e. HAS-A}). Aggregation should not be confused with composition. In other words, each $Person$ HAS-A $Job$. The class $Job$ can live it on its own without a $Person$ having that particular $Job$. Each $Job$ will have its own class to store properties specific to that $Job$. The person class should be the only class denoting a person. This person class can have its set of jobs or roles as a property.
 
 \section*{13}
-% look at old quizzes for help
 
 \subsection*{Java}
 \lstinputlisting[language=Java]{code/OddGenerator.java}
 \subsection*{Python}
+\lstinputlisting[language=Python]{code/odd_generator.py}
 \subsection*{Javascript}
 \lstinputlisting{code/nextOdd.js}
 \subsection*{C++}
+\lstinputlisting[language=C++]{code/oddGenerator.cpp}
 
 \end{document}  
